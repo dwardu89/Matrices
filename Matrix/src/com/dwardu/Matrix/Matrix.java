@@ -24,7 +24,7 @@ public class Matrix implements Comparable<Matrix> {
 		for (int i = 0; i < rowSize; i++) {
 			String[] row = array[i].split(",");
 			for (int j = 0; j < columnSize; j++) {
-				values[i][j] = Double.parseDouble(row[i]);
+				values[i][j] = Double.parseDouble(row[i]);  
 			}
 		}
 	}
