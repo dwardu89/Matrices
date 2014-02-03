@@ -29,6 +29,24 @@ public class Matrix implements Comparable<Matrix> {
 		}
 	}
 
+	/*
+	 * @return the size of a matrix
+	 */
+	public int getSize()
+	{
+		return Math.max(rowSize, columnSize);
+	}
+	
+	/*
+	 * Determines whether the matrix is a square matrix.
+	 * 
+	 * @return true if matrix is square, false if the matrix is not square
+	 */
+	public boolean isSquare()
+	{
+		return this.columnSize == this.rowSize;
+	}
+	
 	public double[][] getValues() {
 		return values;
 	}
