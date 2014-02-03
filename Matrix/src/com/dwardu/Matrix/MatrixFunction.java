@@ -74,7 +74,45 @@ public class MatrixFunction {
 	}
 
 	/*
-	 * Creates a lower triangular matrixs
+	 * Multiplies a matrix by a value
+	 * 
+	 * @param value
+	 * 
+	 * @param matrix
+	 * 
+	 * @return product
+	 */
+	public static Matrix multiply(int value, Matrix matrix) {
+		Matrix product = new Matrix(matrix.getColumnSize(), matrix.getRowSize());
+		for (int i = 0; i < matrix.getColumnSize(); i++) {
+			for (int j = 0; j < matrix.getRowSize(); j++) {
+				product.setValueAt(j, i, value * matrix.getValueAt(j, i));
+			}
+		}
+		return product;
+	}
+
+	/*
+	 * Multiplies a matrix by a value
+	 * 
+	 * @param value
+	 * 
+	 * @param matrix
+	 * 
+	 * @return product
+	 */
+	public static Matrix multiply(double value, Matrix matrix) {
+		Matrix product = new Matrix(matrix.getColumnSize(), matrix.getRowSize());
+		for (int i = 0; i < matrix.getColumnSize(); i++) {
+			for (int j = 0; j < matrix.getRowSize(); j++) {
+				product.setValueAt(j, i, value * matrix.getValueAt(j, i));
+			}
+		}
+		return product;
+	}
+
+	/*
+	 * Creates a lower triangular matrix
 	 */
 	public static Matrix createLowerTriangularMatrix(Matrix matrix) {
 		for (int i = 0; i < matrix.getRowSize(); i++) {
@@ -272,8 +310,9 @@ public class MatrixFunction {
 	}
 
 	/*
-	 * Will get the sign of a matrix, which is used for the determinant
-	 * if the number is even, then the sign returned is positive, if no then its negative.
+	 * Will get the sign of a matrix, which is used for the determinant if the
+	 * number is even, then the sign returned is positive, if no then its
+	 * negative.
 	 * 
 	 * @param i index
 	 * 
@@ -294,5 +333,29 @@ public class MatrixFunction {
 	private static double getTwoByTwoDeterminant(Matrix a) {
 		return a.getValueAt(0, 0) * a.getValueAt(1, 1) - a.getValueAt(0, 1)
 				* a.getValueAt(1, 0);
-	} 
+	}
+	/*
+	 * Returns the transpose of a matrix
+	 */
+	public static Matrix transpose(Matrix matrix)
+	{
+		return null;
+	}
+	
+	public static Matrix cofactor(Matrix matrix)
+	{
+		Matrix c = new Matrix( matrix.getRowSize(),matrix.getColumnSize());
+		
+		for (int i = 0; i < matrix.getRowSize(); i++) {
+			for (int j = 0; j < matrix.getColumnSize(); j++) {
+				c.setValueAt(i, j, Math.pow(-1, i+j)*getDeterminant(createSubMatrix(matrix, j, i)));
+			}
+		}	
+	return c;
+	}
+	
+	public static Matrix inverse(Matrix matrix)
+	{
+		return multiply(1/getDeterminant(matrix),transpose(cofactor(matrix)));
+	}
 }
