@@ -339,7 +339,13 @@ public class MatrixFunction {
 	 */
 	public static Matrix transpose(Matrix matrix)
 	{
-		return null;
+		Matrix t = new Matrix(matrix.getColumnSize(), matrix.getRowSize());
+		for (int row = 0; row < t.getRowSize(); row++) {
+			for (int col = 0; col < t.getColumnSize(); col++) {
+				t.setValueAt(row, col, matrix.getValueAt(col, row));
+			}
+		}
+		return t;
 	}
 	
 	public static Matrix cofactor(Matrix matrix)
