@@ -335,11 +335,25 @@ public class MatrixFunction {
 				* a.getValueAt(1, 0);
 	}
 	/*
-	 * Returns the transpose of a matrix
+	 * Returns the transpose of a matrix 
+	 *
+     * @param matrix is the matrix to be transposed
+     *
+	 * @return transpose of matrix
 	 */
 	public static Matrix transpose(Matrix matrix)
 	{
-		return null;
+
+		Matrix transposed = new Matrix(matrix.getColumnSize(), matrix.getRowSize());
+		
+		for (int row = 0; row < matrix.getRowSize()){
+
+			for (int column = 0; matrix.getColumnSize()){
+
+				transposed.setValueAt(row, column, matrix.getValueAt(column, row));
+			}
+		}
+		return transposed;
 	}
 	
 	public static Matrix cofactor(Matrix matrix)
