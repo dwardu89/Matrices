@@ -4,82 +4,89 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by AbdulR3hman on 05/10/2016.
  */
 public class MatrixTest {
 
-    private Matrix m;
+    private Matrix matrixA;
+    private Matrix matrixATwin;
+    private Matrix matrixB;
 
     @Before
     public void setUp()
     {
         //Setup 2X2 matrix
         double[][] t = new double[2][2];
+        double[][] v = new double[2][2];
         t[0][0] = 0;
         t[0][1] = 1;
         t[1][0] = 2;
         t[1][1] = 3;
 
-        m = new Matrix(2,2);
-        m.setValues(t);
+        v[0][0] = 1;
+        v[0][1] = 1;
+        v[1][0] = 1;
+        v[1][1] = 1;
+
+        matrixA = new Matrix(2,2);
+        matrixB = new Matrix(2,2);
+        matrixATwin = new Matrix(2,2);
+        matrixA.setValues(t);
+        matrixB.setValues(v);
+        matrixATwin.setValues(t);
     }
 
     @Test
     public void testMatrixRowSizeAndColumnSize()
     {
-        assertEquals(2, m.getColumnSize());
-        assertEquals(2, m.getRowSize());
+        assertEquals(2, matrixA.getColumnSize());
+        assertEquals(2, matrixA.getRowSize());
     }
 
     @Test
     public void testMatrixElements()
     {
-        assertEquals(0d, m.getValueAt(0,0),0.001);
-        assertEquals(1d, m.getValueAt(0,1),0.001);
-        assertEquals(2d, m.getValueAt(1,0),0.001);
-        assertEquals(3d, m.getValueAt(1,1),0.001);
+        assertEquals(0d, matrixA.getValueAt(0,0),0.001);
+        assertEquals(1d, matrixA.getValueAt(0,1),0.001);
+        assertEquals(2d, matrixA.getValueAt(1,0),0.001);
+        assertEquals(3d, matrixA.getValueAt(1,1),0.001);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testMatrixAfterShrinking()
     {
-        m.arrangeMatrix(1,1);
-        assertEquals(1, m.getColumnSize());
-        assertEquals(1, m.getRowSize());
-        assertEquals(0d, m.getValueAt(0,0),0.001);
-        assertEquals(1d, m.getValueAt(0,1),0.001);
+        matrixA.arrangeMatrix(1,1);
+        assertEquals(1, matrixA.getColumnSize());
+        assertEquals(1, matrixA.getRowSize());
+        assertEquals(0d, matrixA.getValueAt(0,0),0.001);
+        assertEquals(1d, matrixA.getValueAt(0,1),0.001);
         //throws exception
-        m.getValueAt(1,1);
+        matrixA.getValueAt(1,1);
     }
 
     @Test
     public void testMatrixAfterEnlarging()
     {
-        m.arrangeMatrix(2,3);
-        assertEquals(3, m.getColumnSize());
-        assertEquals(2, m.getRowSize());
-        assertEquals(0d, m.getValueAt(0,0),0.001);
-        assertEquals(1d, m.getValueAt(0,1),0.001);
-        assertEquals(0d, m.getValueAt(0,2),0.001);
+        matrixA.arrangeMatrix(2,3);
+        assertEquals(3, matrixA.getColumnSize());
+        assertEquals(2, matrixA.getRowSize());
+        assertEquals(0d, matrixA.getValueAt(0,0),0.001);
+        assertEquals(1d, matrixA.getValueAt(0,1),0.001);
+        assertEquals(0d, matrixA.getValueAt(0,2),0.001);
     }
 
-
-//    @Test
-//    public void testAdd() {
-//        String str = "Junit is working fine";
-//        assertEquals("Junit is working fine",str);
-//    }
-//
-//    @Test
-//    public void testExceptionMessage() {
-//        try {
-//            new ArrayList<Object>().get(0);
-//            fail("Expected an IndexOutOfBoundsException to be thrown");
-//        } catch (IndexOutOfBoundsException anIndexOutOfBoundsException) {
-//            assertThat(anIndexOutOfBoundsException.getMessage(), is("Index: 0, Size: 0"));
-//        }
-//    }
-
+    @Test
+    public void testTwoEqualMatricesIfTheyAreEqual()
+    {
+        assertEquals(0, matrixA.compareTo(matrixATwin));
+    }
+    @Test
+    public void testTwoUnequalMatricesIfTheyAreEqual()
+    {
+        assertEquals(-1, matrixA.compareTo(matrixB));
+        assertNotEquals(0, matrixA.compareTo(matrixB));
+    }
 }
