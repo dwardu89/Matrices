@@ -345,12 +345,9 @@ public class MatrixFunction {
 	{
 
 		Matrix transposed = new Matrix(matrix.getColumnSize(), matrix.getRowSize());
-		
-		for (int row = 0; row < matrix.getRowSize()){
-
-			for (int column = 0; matrix.getColumnSize()){
-
-				transposed.setValueAt(row, column, matrix.getValueAt(column, row));
+		for(int row = 0; row < matrix.getRowSize()){
+                        for (int column = 0; matrix.getColumnSize()){
+                             transposed.setValueAt(row, column, matrix.getValueAt(column, row));
 			}
 		}
 		return transposed;
